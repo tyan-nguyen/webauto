@@ -10,10 +10,10 @@ use app\modules\template\models\TemplateVaribles;
  *
  * @property int $id
  * @property int $id_website
- * @property int $id_templage_varible
+ * @property int $id_template_varible
  * @property string|null $value
  *
- * @property TemplateVaribles $templageVarible
+ * @property TemplateVaribles $templateVarible
  * @property Website $website
  */
 class WebsiteVariblesBase extends \app\models\WebsiteVaribles
@@ -24,11 +24,11 @@ class WebsiteVariblesBase extends \app\models\WebsiteVaribles
     public function rules()
     {
         return [
-            [['id_website', 'id_templage_varible'], 'required'],
-            [['id_website', 'id_templage_varible'], 'integer'],
+            [['id_website', 'id_template_varible'], 'required'],
+            [['id_website', 'id_template_varible'], 'integer'],
             [['value'], 'string', 'max' => 255],
             [['id_website'], 'exist', 'skipOnError' => true, 'targetClass' => Website::class, 'targetAttribute' => ['id_website' => 'id']],
-            [['id_templage_varible'], 'exist', 'skipOnError' => true, 'targetClass' => TemplateVaribles::class, 'targetAttribute' => ['id_templage_varible' => 'id']],
+            [['id_template_varible'], 'exist', 'skipOnError' => true, 'targetClass' => TemplateVaribles::class, 'targetAttribute' => ['id_template_varible' => 'id']],
         ];
     }
 
@@ -40,7 +40,7 @@ class WebsiteVariblesBase extends \app\models\WebsiteVaribles
         return [
             'id' => 'ID',
             'id_website' => 'Id Website',
-            'id_templage_varible' => 'Id Templage Varible',
+            'id_template_varible' => 'Id Template Varible',
             'value' => 'Value',
         ];
     }
@@ -50,9 +50,9 @@ class WebsiteVariblesBase extends \app\models\WebsiteVaribles
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getTemplageVarible()
+    public function getTemplateVarible()
     {
-        return $this->hasOne(TemplateVaribles::class, ['id' => 'id_templage_varible']);
+        return $this->hasOne(TemplateVaribles::class, ['id' => 'id_template_varible']);
     }
 
     /**

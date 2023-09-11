@@ -41,14 +41,27 @@ $this->params['breadcrumbs'][] = $this->title;
                 'urlCreator' => function ($action, Template $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  },
-                 'template' => '{view} {update} {delete} {myButton}',  // the default buttons + your custom button
+                 'template' => '{view} {update} {delete} {addPage} {addVarible} {addBlock}',  // the default buttons + your custom button
                  'buttons' => [
-                    'myButton' => function($url, $model, $key) {     // render your custom button
+                    'addPage' => function($url, $model, $key) {     // render your custom button
                         return Html::a(
                             'add pages',
                             [Yii::getAlias('@web/template/template-pages/add'), 'code' => $model->code]
                         );
-                    }
+                    },
+                    'addVarible' => function($url, $model, $key) {     // render your custom button
+                        return Html::a(
+                        'add varible',
+                        [Yii::getAlias('@web/template/template/add-varible'), 'code' => $model->code]
+                        );
+                    },
+                    'addBlock' => function($url, $model, $key) {     // render your custom button
+                        return Html::a(
+                        'add blocks',
+                        [Yii::getAlias('@web/template/template/add-block'), 'code' => $model->code]
+                        );
+                    },
+                    
                  ],
             ],
         ],

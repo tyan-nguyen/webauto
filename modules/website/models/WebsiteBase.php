@@ -60,13 +60,52 @@ class WebsiteBase extends \app\models\Website
      * {@inheritdoc}
      */
     public function afterSave( $insert, $changedAttributes ){
+        //add page
         foreach ($this->template->templatePages as $page){
             $websitePage = new WebsitePages();
             $websitePage->id_website = $this->id;
-            $websitePage->id_templage_page = $page->id;
+            $websitePage->id_template_page = $page->id;
             $websitePage->save();
         }
+        //add varible
+        foreach ($this->template->templateVaribles as $varible){
+            $websiteVarible = new WebsiteVaribles();
+            $websiteVarible->id_website = $this->id;
+            $websiteVarible->id_template_varible = $varible->id;
+            $websiteVarible->value = $varible->value;
+            $websiteVarible->save();
+        }
+        //add block
+        foreach ($this->template->templateBlocks as $block){
+            $websiteBlock = new WebsiteBlocks();
+            $websiteBlock->id_website = $this->id;
+            $websiteBlock->id_template_block = $block->id;
+            $websiteBlock->content = $block->content;
+            $websiteBlock->save();
+        }
         parent::afterSave($insert, $changedAttributes);
+    }
+    
+    /**
+     * {@inheritdoc}
+     * xoa file anh
+     */
+    public function beforeDelete()
+    {        
+        foreach ($this->websitePages as $tpage){
+            $tpage->delete();
+        }
+        
+        //delete varible
+        foreach ($this->websiteVaribles as $varible){
+            $varible->delete();
+        }
+        //delete block
+        foreach ($this->websiteBlocks as $block){
+            $block->delete();
+        }
+        
+        return parent::beforeDelete();
     }
 
     /**

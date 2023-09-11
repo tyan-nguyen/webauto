@@ -7,6 +7,9 @@ use app\modules\template\models\TemplateSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\modules\template\models\TemplateVaribles;
+use app\custom\Message;
+use app\modules\template\models\TemplateBlocks;
 
 /**
  * TemplateController implements the CRUD actions for Template model.
@@ -80,6 +83,58 @@ class TemplateController extends Controller
         return $this->render('create', [
             'model' => $model,
         ]);
+    }
+    
+    public function actionAddVarible($code){
+        $template = ($code != null ? Template::findOne(['code' => $code]) : null);
+        if($template != null):
+            $model = new TemplateVaribles();
+            $model->id_template = $template->id;
+            if ($this->request->isPost) {
+                if ($model->load($this->request->post()) ) {
+                    if($model->id_template == $template->id){                      
+                        if($model->save()){
+                            return $this->redirect(['index']);
+                        } else {
+                            return $this->render('add-varible', compact('model'));
+                        }
+                    } else {
+                        throw new NotFoundHttpException(Message::$exception['m011']);
+                    }
+                }
+            } else {
+                $model->loadDefaultValues();
+            }
+            return $this->render('add-varible', compact('model'));
+        else:
+            throw new NotFoundHttpException(Message::$exception['m001']);
+        endif;
+    }
+    
+    public function actionAddBlock($code){
+        $template = ($code != null ? Template::findOne(['code' => $code]) : null);
+        if($template != null):
+        $model = new TemplateBlocks();
+        $model->id_template = $template->id;
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post()) ) {
+                if($model->id_template == $template->id){
+                    if($model->save()){
+                        return $this->redirect(['index']);
+                    } else {
+                        return $this->render('add-block', compact('model'));
+                    }
+                } else {
+                    throw new NotFoundHttpException(Message::$exception['m011']);
+                }
+            }
+        } else {
+            $model->loadDefaultValues();
+        }
+        return $this->render('add-block', compact('model'));
+        else:
+            throw new NotFoundHttpException(Message::$exception['m001']);
+        endif;
     }
 
     /**

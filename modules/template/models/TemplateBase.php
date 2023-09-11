@@ -24,6 +24,7 @@ use app\modules\website\models\Website;
 class TemplateBase extends \app\models\Template
 {
     CONST FOLDER_DOCUMENTS = '/uploads/templates/';
+    CONST FOLDER_DOCUMENTS_2 = '\\uploads\templates\\'; //use in render website page
     /**
      * {@inheritdoc}
      */
@@ -54,8 +55,12 @@ class TemplateBase extends \app\models\Template
     }
     
     public function getTemplateRootFolder(){
+        //upload in web
         return Yii::getAlias('@webroot') . TemplateBase::FOLDER_DOCUMENTS . $this->code;
+        //upload in base
+        //return Yii::getAlias('@webroot') . '/../' . TemplateBase::FOLDER_DOCUMENTS . $this->code;
     }
+    
     
     /**
      * {@inheritdoc}
@@ -116,6 +121,19 @@ class TemplateBase extends \app\models\Template
         
         foreach ($this->templatePages as $tpage){
             $tpage->delete();
+        }
+        
+        //delete website
+        foreach ($this->websites as $web){
+            $web->delete();
+        }
+        //delete varible
+        foreach ($this->templateVaribles as $varible){
+            $varible->delete();
+        }
+        //delete block
+        foreach ($this->templateBlocks as $block){
+            $block->delete();
         }
         
         return parent::beforeDelete();

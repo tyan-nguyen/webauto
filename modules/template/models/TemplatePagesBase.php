@@ -63,6 +63,15 @@ class TemplatePagesBase extends \app\models\TemplatePages
         return $this->template->getTemplateRootFolder() . '/' . $this->file;
     }
     
+    //upload in base
+   /*  public function getFileRenderUrl(){
+        return '..\..\..\..' . TemplateBase::FOLDER_DOCUMENTS_2 . $this->template->code . '\\' . $this->file;
+    } */
+    //upload in web
+    public function getFileRenderUrl(){
+        return '..\..\..\..\web' . TemplateBase::FOLDER_DOCUMENTS_2 . $this->template->code . '\\' . $this->file;
+    }
+    
     /**
      * {@inheritdoc}
      */
@@ -97,6 +106,12 @@ class TemplatePagesBase extends \app\models\TemplatePages
         if(file_exists($this->getFileRootUrl())){
             unlink($this->getFileRootUrl());
         }
+        
+        //delete website page
+        foreach ($this->websitePages as $page){
+            $page->delete();
+        }
+        
         return parent::beforeDelete();
     }
 
@@ -117,6 +132,6 @@ class TemplatePagesBase extends \app\models\TemplatePages
      */
     public function getWebsitePages()
     {
-        return $this->hasMany(WebsitePages::class, ['id_templage_page' => 'id']);
+        return $this->hasMany(WebsitePages::class, ['id_template_page' => 'id']);
     }
 }

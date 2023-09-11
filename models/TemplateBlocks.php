@@ -11,7 +11,7 @@ use Yii;
  * @property int $id_template
  * @property string $code
  * @property string $name
- * @property string $value
+ * @property string $content
  * @property int|null $user_created
  * @property string|null $date_created
  *
@@ -34,9 +34,9 @@ class TemplateBlocks extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_template', 'code', 'name', 'value'], 'required'],
+            [['id_template', 'code', 'name', 'content'], 'required'],
             [['id_template', 'user_created'], 'integer'],
-            [['value'], 'string'],
+            [['content'], 'string'],
             [['date_created'], 'safe'],
             [['code', 'name'], 'string', 'max' => 255],
             [['id_template'], 'exist', 'skipOnError' => true, 'targetClass' => Template::class, 'targetAttribute' => ['id_template' => 'id']],
@@ -53,7 +53,7 @@ class TemplateBlocks extends \yii\db\ActiveRecord
             'id_template' => 'Id Template',
             'code' => 'Code',
             'name' => 'Name',
-            'value' => 'Value',
+            'content' => 'Content',
             'user_created' => 'User Created',
             'date_created' => 'Date Created',
         ];

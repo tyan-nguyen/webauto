@@ -28,7 +28,7 @@ class TemplateVariblesBase extends \app\models\TemplateVaribles
     public function rules()
     {
         return [
-            [['id_template', 'code', 'name', 'varible_type', 'value'], 'required'],
+            [['id_template', 'name', 'value'], 'required'],
             [['id_template', 'user_created'], 'integer'],
             [['date_created'], 'safe'],
             [['code', 'name', 'value'], 'string', 'max' => 255],
@@ -53,6 +53,42 @@ class TemplateVariblesBase extends \app\models\TemplateVaribles
             'date_created' => 'Date Created',
         ];
     }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function beforeSave($insert) {
+        if ($this->isNewRecord) {
+            $this->datetime_created = date('Y-m-d H:i:s');
+            $this->user_created = Yii::$app->user->isGuest ? '' : Yii::$app->user->id;
+        }
+        return parent::beforeSave($insert);
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function afterSave( $insert, $changedAttributes ){
+        if($this->code == null){
+            $this->code = md5($this->id . $this->datetime_created);
+            $this->save();
+        }
+        parent::afterSave($insert, $changedAttributes);
+    }
+    
+    /**
+     * {@inheritdoc}
+     * xoa varible website
+     */
+    public function beforeDelete()
+    {
+        //delete website varible
+        foreach ($this->websiteVaribles as $varible){
+            $varible->delete();
+        }
+        
+        return parent::beforeDelete();
+    }
 
     /**
      * Gets query for [[Template]].
@@ -71,6 +107,6 @@ class TemplateVariblesBase extends \app\models\TemplateVaribles
      */
     public function getWebsiteVaribles()
     {
-        return $this->hasMany(WebsiteVaribles::class, ['id_templage_varible' => 'id']);
+        return $this->hasMany(WebsiteVaribles::class, ['id_template_varible' => 'id']);
     }
 }

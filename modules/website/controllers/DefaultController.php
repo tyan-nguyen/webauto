@@ -44,8 +44,11 @@ class DefaultController extends Controller
     
     public function actionDetail($id)
     {
-        $model = WebsitePages::findOne($id);
-        $page = TemplatePages::findOne($model->id_templage_page);
-        return $this->render($page::get, compact('model'));
+        $webpage = WebsitePages::findOne($id);
+        $page = TemplatePages::findOne($webpage->id_template_page);
+        $model = Website::findOne($webpage->id_website);
+        $varibles = $model->getVaribles();
+        $blocks = $model->getBlocks();
+        return $this->render($page->getFileRenderUrl(), compact('varibles', 'blocks'));
     }
 }

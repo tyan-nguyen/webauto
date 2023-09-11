@@ -9,7 +9,7 @@ use Yii;
  *
  * @property int $id
  * @property int $id_website
- * @property int $id_templage_page
+ * @property int $id_template_page
  *
  * @property TemplatePages $templagePage
  * @property Website $website
@@ -30,9 +30,9 @@ class WebsitePages extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_website', 'id_templage_page'], 'required'],
-            [['id_website', 'id_templage_page'], 'integer'],
-            [['id_templage_page'], 'exist', 'skipOnError' => true, 'targetClass' => TemplatePages::class, 'targetAttribute' => ['id_templage_page' => 'id']],
+            [['id_website', 'id_template_page'], 'required'],
+            [['id_website', 'id_template_page'], 'integer'],
+            [['id_template_page'], 'exist', 'skipOnError' => true, 'targetClass' => TemplatePages::class, 'targetAttribute' => ['id_template_page' => 'id']],
             [['id_website'], 'exist', 'skipOnError' => true, 'targetClass' => Website::class, 'targetAttribute' => ['id_website' => 'id']],
         ];
     }
@@ -45,7 +45,7 @@ class WebsitePages extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'id_website' => 'Id Website',
-            'id_templage_page' => 'Id Templage Page',
+            'id_template_page' => 'Id Templage Page',
         ];
     }
 
@@ -56,7 +56,7 @@ class WebsitePages extends \yii\db\ActiveRecord
      */
     public function getTemplagePage()
     {
-        return $this->hasOne(TemplatePages::class, ['id' => 'id_templage_page']);
+        return $this->hasOne(TemplatePages::class, ['id' => 'id_template_page']);
     }
 
     /**
