@@ -20,13 +20,13 @@ $js = <<< JS
             tabsize: 2,
             height: 200,
             toolbar: [
-              ['style', ['style']],
+              //['style', ['style']],
               ['font', ['bold', 'underline', 'clear']],
               ['color', ['color']],
               ['para', ['ul', 'ol', 'paragraph']],
-              ['table', ['table']],
+              //['table', ['table']],
               ['insert', ['link', 'picture', 'video']],
-              ['view', ['fullscreen', 'codeview', 'help']]
+              //['view', ['fullscreen', 'codeview', 'help']]
             ],
             callbacks : {
                 onImageUpload: function(files, editor, welEditable) {

@@ -18,6 +18,9 @@ $config = [
         'website' => [
             'class' => 'app\modules\website\Module',
         ],
+        'gridview' =>  [
+            'class' => '\kartik\grid\Module'
+        ],
     ],
     'components' => [
         'request' => [
