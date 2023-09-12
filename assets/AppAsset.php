@@ -23,6 +23,7 @@ class AppAsset extends AssetBundle
         'css/site.css',
     ];
     public $js = [
+        'https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

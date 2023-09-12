@@ -2,7 +2,11 @@
 
 <br/>
 
-<?= $varibles['var1'] ?>
+<?php // $varibles['var1'] ?>
+<br/>
+<?= $theme->shova('var', 'var1') ?>
 
 <br/>
-<?= $varibles['var2'] ?>
+<?php // $varibles['var2'] ?>
+<br/>
+<?= $theme->shova('var', 'var2') ?>

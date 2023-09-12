@@ -2,4 +2,6 @@
 
 <br/>
 
-<?= $blocks['Block info'] ?>
+<?php // $blocks['Block info'] ?>
+
+<?= $theme->shova('block', 'Block info') ?>
