@@ -16,6 +16,10 @@ CrudAsset::register($this);
 ?>
 <!-- on your view layout file HEAD section -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+
+<!-- include summernote css/js -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+
 <style>
 .mydivoutermulti{
 position: relative;
@@ -42,9 +46,16 @@ display:block;
 }
 </style>
 
+<?php Pjax::begin([
+    'id'=>'pjax',
+    'timeout' => 10000
+]); ?>
+
 <?= $this->render($page->getFileRenderUrl(), compact('varibles', 'blocks', 'theme')) ?>
 
-<?php Modal::begin([
+<?php Pjax::end(); ?>
+
+<?php /*Modal::begin([
    'options' => [
         'id'=>'ajaxCrudModal',
         'tabindex' => false // important for Select2 to work properly
@@ -53,4 +64,14 @@ display:block;
    //'closeButton'=>['label'=>'<span aria-hidden=\'true\'>×</span>'],
    'id'=>'ajaxCrudModal',
     'footer'=>'',// always need it for jquery plugin
+])*/ ?>
+
+<?php Modal::begin([
+   "options" => [
+    "id"=>"ajaxCrudModal",
+    "tabindex" => false // important for Select2 to work properly
+],
+   "id"=>"ajaxCrudModal",
+    "footer"=>"",// always need it for jquery plugin
 ])?>
+<?php Modal::end(); ?>

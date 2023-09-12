@@ -25,10 +25,10 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
         'https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js',
-        'assets/9b731ec9/js/dialog.js',
+        //'assets/9b731ec9/js/dialog.js',
         'js/ModalRemote.js',
         'js/ajaxcrud.js',
-        'assets/9b731ec9/js/bootstrap-dialog.js'
+        //'assets/9b731ec9/js/bootstrap-dialog.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

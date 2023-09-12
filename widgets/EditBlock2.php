@@ -32,7 +32,15 @@ class Editblock2 extends Widget{
               
             ]
         ]); */
-        $html = $this->content;
+        
+        $html = '<div class="mydivoutermulti">';
+        
+        $html .= $this->content;
+        
+        $html .= '<a href="/website/web/edit-block?id='.$this->id.'" role="modal-remote" data-pjax="1" class="buttonoverlapmulti"><i class="fas fa-pen-square"></i></a>';
+        
+        
+        $html.= '</div>';
         
         
         return $html;

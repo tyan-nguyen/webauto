@@ -147,18 +147,6 @@ function ModalRemote(modalId) {
      * @param {string} content The content of modal footer
      */
     this.setFooter = function (content) {
-		//content = content.replace('>Close<', '><span class="fe fe-x"></span> Đóng lại<');
-		//content = content.replace('>Edit<', '><span class="ti-pencil-alt"></span> Sửa<');
-		//content = content.replace('>Copy<', '><span class="fe fe-copy"></span> Nhân đôi<');
-		/*content = content.replace('>Đóng lại<', '><span class="fe fe-x"></span> Đóng lại<');
-		content = content.replace('>Đóng<', '><span class="fe fe-x"></span> Đóng lại<');
-		content = content.replace('>Sửa<', '><span class="ti-pencil-alt"></span> Sửa<');
-		content = content.replace('>Tiếp tục thêm<', '><span class="fe fe-plus"></span> Tiếp tục thêm<');
-		content = content.replace('>Tìm thiết bị<', '><span class="fe fe-search"></span> Tìm thiết bị<');
-		content = content.replace('>Tải lên<', '><span class="fe fe-upload"></span> Tải lên<');
-		content = content.replace('>Tiến hành upload<', '><span class="fe fe-upload"></span> Tiến hành upload<');
-		content = content.replace('>Lưu lại<', '><span class="fe fe-save"></span> Lưu lại<');
-		content = content.replace('>Copy<', '><span class="fe fe-copy"></span> Nhân đôi<');*/
         $(this.footer).html(content);
     };
 
@@ -170,7 +158,7 @@ function ModalRemote(modalId) {
         // remove old title
         $(this.header).find('h5.modal-title').remove();
         // add new title
-        $(this.header).prepend('<h5 class="modal-title text-primary">' + title + '</h5>');
+        $(this.header).prepend('<h5 class="modal-title">' + title + '</h5>');
     };
 
     /**
@@ -205,7 +193,7 @@ function ModalRemote(modalId) {
         buttonElm = document.createElement('button');
         buttonElm.setAttribute('type', type === null ? 'button' : type);
         buttonElm.setAttribute('class', classes === null ? 'btn btn-primary' : classes);
-		buttonElm.innerHTML = label;
+        buttonElm.innerHTML = label;
         var instance = this;
         $(this.footer).append(buttonElm);
         if (callback !== null) {
@@ -280,22 +268,7 @@ function ModalRemote(modalId) {
             } else {
                 $.pjax.reload({ container: response.forceReload });
             }
-            
-			/* send notify */
-			if(typeof response.tcontent !== 'undefined'){
-				showNotif(response.tcontent);
-			}
-			
         }
-        
-        //***dung chung hinh anh, tai lieu update html
-		if(typeof response.dungChungType !== 'undefined'){
-			if(response.dungChungType=='hinhAnh'){
-				$('#imgBlock').html(response.dungChungContent);
-			} else if(response.dungChungType=='taiLieu'){
-				$('#docsBlock').html(response.dungChungContent);
-			}
-		}
 
         // Close modal if response contains forceClose field
         if (response.forceClose !== undefined && response.forceClose) {
@@ -345,10 +318,6 @@ function ModalRemote(modalId) {
                 // Test if browser supports FormData which handles uploads
                 if (window.FormData) {
                     data = new FormData($(modalForm)[0]);
-                    //***gui trang thai luu tam
-                    if($(modalFormSubmitBtn).attr('value')=='luuTam'){
-                    	data.append("submitType", $(modalFormSubmitBtn).attr('value'));
-                    }
                 } else {
                     // Fallback to serialize
                     data = $(modalForm).serializeArray();

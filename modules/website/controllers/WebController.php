@@ -73,13 +73,48 @@ class WebController extends Controller
                 ];
             }else if($model->load($request->post()) && $model->save()){
                 return [
-                    'forceReload'=>'#pjax'.$id,
+                    'forceReload'=>'#pjax',
+                    'forceClose'=>true,
+                ];
+            }
+        }       
+    }
+    
+    public function actionEditBlock($id) {
+        $request = Yii::$app->request;
+        $model = WebsiteBlocks::findOne($id); // your model can be loaded here
+        if($request->isAjax){
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            if($request->isGet){
+                return [
+                    'title'=> "Cập nhật",
+                    'content'=>$this->renderAjax('_formBlock', [
+                        'model' => $model,
+                    ]),
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-bs-dismiss'=>"modal"]).
+                    Html::button('Save & close',['class'=>'btn btn-primary','type'=>"submit"])
+                ];
+            }else if($model->load($request->post()) && $model->save()){
+                return [
+                    'forceReload'=>'#pjax',
                     'forceClose'=>true,
                 ];
             }
         }
+    }
+    
+    public function actionDeleteFile(){
+        $src = explode('/uploads', $_POST['src']);
+        $src =  '\uploads' . str_replace('/', '\\', $src[1]);
         
-        
+        if($src != null){
+            if(file_exists(Yii::getAlias('@webroot') . $src )){
+                if(unlink(Yii::getAlias('@webroot') . $src ) ){
+                    return 'File Delete Successfully';
+                }
+            }
+        }
+       // return Yii::getAlias('@webroot') . $src;
     }
     
 }
