@@ -4,7 +4,7 @@ namespace app\widgets;
 use yii\base\Widget;
 use kartik\editable\Editable;
 
-class Editblock2 extends Widget{
+class EditBlock2 extends Widget{
     public $id;
     public $content;
     
@@ -37,7 +37,7 @@ class Editblock2 extends Widget{
         
         $html .= $this->content;
         
-        $html .= '<a href="/website/web/edit-block?id='.$this->id.'" role="modal-remote" data-pjax="1" class="buttonoverlapmulti"><i class="fas fa-pen-square"></i></a>';
+        $html .= '<a href="/website/web/edit-block?id='.$this->id.'" role="modal-remote" data-pjax="1" data-modal-size="large" class="buttonoverlapmulti"><i class="fas fa-pen-square"></i></a>';
         
         
         $html.= '</div>';

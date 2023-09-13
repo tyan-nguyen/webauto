@@ -19,7 +19,7 @@ $(document).ready(function () {
     // Catch click event on all buttons that want to open a modal
     $(document).on('click', '[role="modal-remote"]', function (event) {
         event.preventDefault();
-
+        
         // Open modal
         modal.open(this, null);
     });

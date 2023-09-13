@@ -60,6 +60,8 @@ class WebsiteBase extends \app\models\Website
      * {@inheritdoc}
      */
     public function afterSave( $insert, $changedAttributes ){
+        //create folder
+        
         //add page
         foreach ($this->template->templatePages as $page){
             $websitePage = new WebsitePages();

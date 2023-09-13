@@ -21,7 +21,7 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
-        'css/ajaxcrud.css',
+        //'css/ajaxcrud.css',
     ];
     public $js = [
         'https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js',

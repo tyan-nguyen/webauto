@@ -430,6 +430,8 @@ function ModalRemote(modalId) {
                 bulkData
             )
         } else {
+			//set size modal
+			$(elm).hasAttr('data-modal-size') ? this.setSize($(elm).attr('data-modal-size')) : '',
             this.doRemote(
                 $(elm).hasAttr('href') ? $(elm).attr('href') : $(elm).attr('data-url'),
                 $(elm).hasAttr('data-request-method') ? $(elm).attr('data-request-method') : 'GET',

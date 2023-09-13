@@ -1,14 +1,14 @@
 
 <?php 
 use app\custom\ThemeControl2;
-use yii\bootstrap5\Html;
+/* use yii\bootstrap5\Html; */
 use yii\bootstrap5\Modal;
-use kartik\grid\GridView;
+/* use kartik\grid\GridView;
 use cangak\ajaxcrud\CrudAsset;
-use cangak\ajaxcrud\BulkButtonWidget;
+use cangak\ajaxcrud\BulkButtonWidget; */
 use yii\widgets\Pjax;
 
-CrudAsset::register($this);
+//CrudAsset::register($this);
 
     $theme = new ThemeControl2();
     //$theme->mod = 'view';
@@ -23,22 +23,22 @@ CrudAsset::register($this);
 <style>
 .mydivoutermulti{
 position: relative;
-background: #f90;
-width: 100%;
+/* background: #f90; */
+/* width: 100%;
 min-height: 200px;
 float: left;
 margin-right: 15px;
-margin-bottom:50px;
+margin-bottom:50px; */
 }
 .buttonoverlapmulti{
 position: absolute;
 z-index: 2;
-top: 5px;
+top: -35px;
 display: none;
-right: 10px;
+left: 0px;
 width: auto;
 font-size:30px;
-color:white;
+color:red;
 cursor:pointer;
 }
 .mydivoutermulti:hover .buttonoverlapmulti{ 
@@ -68,9 +68,10 @@ display:block;
 
 <?php Modal::begin([
    "options" => [
-    "id"=>"ajaxCrudModal",
-    "tabindex" => false // important for Select2 to work properly
-],
+        "id"=>"ajaxCrudModal",
+        "tabindex" => false // important for Select2 to work properly
+    ],
+   //'dialogOptions'=>['class'=>'modal-xl'],
    "id"=>"ajaxCrudModal",
     "footer"=>"",// always need it for jquery plugin
 ])?>

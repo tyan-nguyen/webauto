@@ -13,7 +13,7 @@ class Editvar2 extends Widget{
     }
     
     public function run(){
-        //return $this->value . '---------------edit';
+       //return $this->value . '---------------edit';
        /*  return Editable::widget([
             'name'=>'varible',
             'asPopover' => true,
@@ -29,7 +29,7 @@ class Editvar2 extends Widget{
         
         $html .= $this->value;
         
-        $html .= '<a href="/website/web/edit-var?id='.$this->id.'" role="modal-remote" data-pjax="1" class="buttonoverlapmulti"><i class="fas fa-pen-square"></i></a>';
+        $html .= '<a href="/website/web/edit-var?id='.$this->id.'" role="modal-remote" data-pjax="1" data-modal-size="small" class="buttonoverlapmulti"><i class="fas fa-pen-square"></i></a>';
         
         
         $html.= '</div>';
